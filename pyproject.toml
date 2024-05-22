@@ -1,0 +1,55 @@
+[tool.poetry]
+name = "rsserpent-plugin-cocoapods"
+version = "0.1.0"
+
+authors = ["EkkoG <beijiu572@gmail.com>"]
+description = "An rsserpent plugin for cocoapods."
+keywords = ["rss"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.6.2"
+rsserpent = ">=0.1.4"
+feedparser = "^6.0.0"
+
+[tool.poetry.dev-dependencies]
+pre-commit = "^2.15.0"
+uvicorn = "^0.15.0"
+# testing
+pytest = "^6.2.4"
+pytest-asyncio = "^0.15.1"
+pytest-cov = "^3.0.0"
+pytest-randomly = "^3.10.1"
+pytest-xdist = "^2.3.0"
+requests = "^2.26.0"
+
+[tool.poetry.plugins."rsserpent.plugin"]
+"cocoapods" = "rsserpent_plugin_cocoapods:plugin"
+
+[tool.black]
+include = '\.pyi?$'
+target-version = ["py36", "py37", "py38", "py39"]
+
+[tool.coverage.run]
+include = ["rsserpent_plugin_cocoapods/*"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "if TYPE_CHECKING:",
+    "pragma: no cover"
+]
+
+[tool.isort]
+balanced_wrapping = true
+combine_as_imports = true
+lines_after_imports = 2
+profile = "black"
+
+[tool.nitpick]
+style = "https://raw.githubusercontent.com/RSSerpent/RSSerpent/master/styles/main.toml"
+cache = "1 day"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
