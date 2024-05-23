@@ -1,7 +1,7 @@
 from typing import Any, Dict
 
 import arrow
-from rsserpent.utils import HTTPClient
+from rsserpent_rev.utils import HTTPClient
 from lxml import html
 
 

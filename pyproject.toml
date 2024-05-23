@@ -9,8 +9,8 @@ license = "MIT"
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.6.2"
-rsserpent = ">=0.1.4"
+python = "^3.12.0"
+rsserpent-rev = ">=0.1.4"
 feedparser = "^6.0.0"
 
 [tool.poetry.dev-dependencies]

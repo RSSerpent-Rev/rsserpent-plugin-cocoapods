@@ -1,7 +1,7 @@
 from typing import Any, Dict
 
 import arrow
-from rsserpent.utils import cached
+from rsserpent_rev.utils import cached
 import feedparser
 from starlette.exceptions import HTTPException
 import hashlib

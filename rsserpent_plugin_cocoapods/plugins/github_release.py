@@ -1,5 +1,5 @@
 from typing import Any, Dict
-from rsserpent.utils import HTTPClient
+from rsserpent_rev.utils import HTTPClient
 from lxml import html
 import arrow
 import feedparser
