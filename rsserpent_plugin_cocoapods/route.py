@@ -41,7 +41,7 @@ async def provider(pod: str) -> Dict[str, Any]:
     commit_atom = f"https://github.com/CocoaPods/Specs/commits/master/Specs/{md5[0]}/{md5[1]}/{md5[2]}/{pod}.atom"
     feed = feedparser.parse(commit_atom)
     if not feed.entries:
-        raise HTTPException(status_code=404, detail="Pod not found")
+        raise HTTPException(status_code=404, detail="Pod not found, please check the pod name, and the name is case-sensitive.")
 
     changelog_url = {
         "Google-Mobile-Ads-SDK": "https://developers.google.com/admob/ios/rel-notes",
