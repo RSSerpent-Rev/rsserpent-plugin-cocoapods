@@ -53,7 +53,7 @@ async def get_changelog() -> Dict[str, Any]:
             })
 
     return {
-        "title": f"AdMob SDK {map_dict[platform]} Update",
+        "title": f"{plugin["pod"]} iOS Changelog",
         "link": url,
         "description": "Latest AdMob SDK update.",
         "pub_date": items[0]["pub_date"],
