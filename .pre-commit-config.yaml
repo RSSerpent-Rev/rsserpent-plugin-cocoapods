@@ -54,7 +54,7 @@ repos:
         # some libraries of the current (poetry) environment for `mypy` to work properly.
         additional_dependencies:
           - pytest==6.2.5
-          - rsserpent==0.1.4
+          - rsserpent-rev==0.1.4
   - repo: https://github.com/PyCQA/flake8
     rev: 7.0.0
     hooks:
@@ -62,15 +62,14 @@ repos:
         name: Lint
         additional_dependencies:
           - darglint==1.8.0
-          - flake8-bugbear==21.9.2
+          - flake8-bugbear==24.4.26
           - flake8-builtins==1.5.3
-          - flake8-comprehensions==3.7.0
+          - flake8-comprehensions==3.14.0
           - flake8-datetimez==20.10.0
           - flake8-debugger==4.0.0
           - flake8-docstrings==1.6.0
-          - flake8-eradicate==1.1.0
+          - flake8-eradicate==1.5.0
           - flake8-print==4.0.0
-          - flake8-too-many==0.1.2
           - pep8-naming==0.12.1
           - tryceratops==0.6.0
   - repo: https://github.com/commitizen-tools/commitizen

@@ -1,4 +1,1 @@
-plugin = {
-    "pod": "AppLovinSDK",
-    "github": "https://github.com/AppLovin/AppLovin-MAX-SDK-iOS"
-}
+plugin = {"pod": "AppLovinSDK", "github": "https://github.com/AppLovin/AppLovin-MAX-SDK-iOS"}
