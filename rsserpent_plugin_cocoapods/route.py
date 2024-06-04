@@ -1,45 +1,42 @@
 import hashlib
 from typing import Any
 
-import arrow
 import feedparser
 from starlette.exceptions import HTTPException
 
 from rsserpent_rev.utils import cached
 
-from . import plugins
+from .github_release import get_changelog, get_changelog_by_url
+from feedgen.feed import FeedGenerator
+
+from feedparser_to_feedgen import to_feedgen
+
+import rsserpent_plugin_admob_sdk_update
+import rsserpent_plugin_applovin_sdk_update
+import rsserpent_plugin_csj_sdk_update
 
 path = "/cocoapods/{pod}"
 
 
-# get all plugins under current module's submodule named "plugins"
-def get_plugins():
-    import importlib
-    import pkgutil
-
-    _plugins = []
-    for _, name, _ in pkgutil.iter_modules(plugins.__path__):
-        module = importlib.import_module(f"{plugins.__name__}.{name}")
-        if hasattr(module, "plugin"):
-            _plugins.append(module)
-
-    return _plugins
-
-
 @cached
 async def provider(pod: str) -> dict[str, Any]:
-    first = list(filter(lambda x: x.plugin["pod"] == pod, get_plugins()))
-    if first:
-        if "github" in first[0].plugin:
-            notes = plugins.github_release.get_changelog_by_url(pod, first[0].plugin["github"])
-            if notes:
-                return notes
-        return await first[0].plugin["provider"]()
+    if pod == "AppLovinSDK":
+        return await rsserpent_plugin_applovin_sdk_update.route.provider("ios")
+    if pod == "Google-Mobile-Ads-SDK":
+        return await rsserpent_plugin_admob_sdk_update.route.provider("ios")
+    if pod == "Ads-CN-Beta":
+        return await rsserpent_plugin_csj_sdk_update.route.provider(148)
+    if pod == "Alamofire":
+        return get_changelog_by_url("https://github.com/Alamofire/Alamofire")
 
-    github_release_note = await plugins.github_release.get_changelog(pod)
+    github_release_note = await get_changelog(pod)
     if github_release_note:
+        github_release_note.title(f"{pod} Changelog")
         return github_release_note
 
+    return await get_specs_log(pod)
+
+async def get_specs_log(pod: str) -> FeedGenerator:
     md5 = hashlib.md5(pod.encode()).hexdigest()
     commit_atom = f"https://github.com/CocoaPods/Specs/commits/master/Specs/{md5[0]}/{md5[1]}/{md5[2]}/{pod}.atom"
     feed = feedparser.parse(commit_atom)
@@ -58,18 +55,10 @@ async def provider(pod: str) -> dict[str, Any]:
         "AppsFlyerFramework": "https://support.appsflyer.com/hc/en-us/articles/115001224823-AppsFlyer-iOS-SDK-release-notes",
     }
 
-    return {
-        "title": f"{pod} Changelog",
-        "link": feed.feed.link,
-        "description": feed.feed.title,
-        "items": [
-            {
-                "title": x.title,
-                "description": x.title
-                + ("\n" + f"Changelog: {changelog_url.get(pod, '')}" if pod in changelog_url else ""),
-                "link": x.link,
-                "pub_date": arrow.get(x.updated),
-            }
-            for x in feed.entries
-        ],
-    }
+    fg = to_feedgen(feed)
+    fg.title(f"{pod} Changelog")
+
+    for entry in fg.entry():
+        entry.description(entry.description() + f"\nChangelog: {changelog_url.get(pod, '')}" if pod in changelog_url else "")
+
+    return fg

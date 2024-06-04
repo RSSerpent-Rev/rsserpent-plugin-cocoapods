@@ -10,8 +10,12 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10.0"
-rsserpent-rev = ">=0.1.4"
+rsserpent-rev = ">=0.1.5"
 feedparser = "^6.0.0"
+feedparser-to-feedgen = {git = "https://github.com/EkkoG/feedparser-to-feedgen"}
+rsserpent-plugin-applovin-sdk-update = {git = "https://github.com/RSSerpent-Rev/rsserpent-plugin-applovin"}
+rsserpent-plugin-csj-sdk-update = {git = "https://github.com/RSSerpent-Rev/rsserpent-plugin-csj-sdk-update"}
+rsserpent-plugin-admob-sdk-update = {git = "https://github.com/RSSerpent-Rev/rsserpent-plugin-admob-sdk-update"}
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^2.15.0"
