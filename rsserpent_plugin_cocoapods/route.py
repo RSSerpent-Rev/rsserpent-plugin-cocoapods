@@ -25,7 +25,7 @@ async def provider(pod: str) -> dict[str, Any]:
     if pod == "Google-Mobile-Ads-SDK":
         return await rsserpent_plugin_admob_sdk_update.route.provider("ios")
     if pod == "Ads-CN-Beta":
-        return await rsserpent_plugin_csj_sdk_update.route.provider(148)
+        return await rsserpent_plugin_csj_sdk_update.route.provider(197)
     if pod == "Alamofire":
         return get_changelog_by_url("https://github.com/Alamofire/Alamofire")
 
