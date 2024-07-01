@@ -24,12 +24,12 @@ repos:
       - id: python-check-blanket-type-ignore
         name: 'Check Blanket "#type:ignore"'
   - repo: https://github.com/asottile/pyupgrade
-    rev: v3.15.2
+    rev: v3.16.0
     hooks:
       - id: pyupgrade
         name: Upgrade Python Syntax
   - repo: https://github.com/crate-ci/typos
-    rev: v1.21.0
+    rev: v1.22.9
     hooks:
       - id: typos
         name: Check Typos
@@ -45,7 +45,7 @@ repos:
       - id: isort
         name: Sort Imports
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.10.0
+    rev: v1.10.1
     hooks:
       - id: mypy
         name: Type Check
@@ -56,7 +56,7 @@ repos:
           - pytest==6.2.5
           - rsserpent-rev==0.1.4
   - repo: https://github.com/PyCQA/flake8
-    rev: 7.0.0
+    rev: 7.1.0
     hooks:
       - id: flake8
         name: Lint
